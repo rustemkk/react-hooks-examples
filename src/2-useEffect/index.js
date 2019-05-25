@@ -9,23 +9,46 @@ const App = () => {
   const [gifs, setGifs] = useState([]);
   const setSearchTextDebounced = debounce(setSearchText, 1000);
 
-  // 1. works like componentDidMount - when you pass empty array as second parameter
+  // 1. works like componentDidMount - when you pass [] as second parameter
   // useEffect(() => {
   //   // any kind of operations, even async
   // }, []);
 
-  // 2. works like componentDidUpdate - when you have dependencies in second parameter
+  // 2. works like componentDidUpdate - when you dont have second parameter
+  // useEffect(() => {
+  //   // any kind of operations, even async
+  // });
+  // calling effect on each component update
+
+  // 3. works like componentDidUpdate with diff check - when you have dependencies in second parameter
   // useEffect(() => {
   //   // any kind of operations, even async
   // }, [searchText]);
+  // calling effect only when searchText changed
 
-  // 3. works like componentWillUnmount - function returned from effect works like componentWillUnmount
+  // 4. function returned from effect works like componentWillUnmount with [] as second parameter
   // useEffect(() => {
-  //   window.addEventListener("click", () => console.log("click"));
+  //   const handleClick = () => console.log('click!');
+  //   console.log("adding listener");
+  //   window.addEventListener("click", handleClick);
   //   return () => {
-  //     window.removeEventListener("click", () => console.log("clean listener"));
+  //     console.log("removing listener");
+  //     window.removeEventListener("click", handleClick);
   //   };
   // }, []);
+  // calling effect after mount and before unmount
+
+  // 5. function returned from effect:
+  // useEffect(() => {
+  //   const handleClick = () => console.log('click!');
+  //   console.log("adding listener");
+  //   window.addEventListener("click", handleClick);
+  //   return () => {
+  //     console.log("removing listener");
+  //     window.removeEventListener("click", handleClick);
+  //   };
+  // });
+  // calling effect for every update (adding/removing) listener
 
   useEffect(() => {
     const fetchData = async () => {
